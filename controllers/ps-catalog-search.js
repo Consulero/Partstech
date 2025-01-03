@@ -12,11 +12,14 @@ module.exports = {
         keyword,
       };
 
-      const result = await makePartsTechPostRequest('/catalog/search', requestData, req.headers.ps_access_token);
+      const result = await makePartsTechPostRequest('/catalog/search', requestData);
 
       res.json(result);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to search by vehicle and keyword', message: error.response?.data || error.message });
+      res.status(500).json({
+        error: 'Failed to search by vehicle and keyword',
+        message: error.response?.data || error.message,
+      });
     }
   },
 
@@ -31,11 +34,14 @@ module.exports = {
         partTypeIds,
       };
 
-      const result = await makePartsTechPostRequest('/catalog/search', requestData, req.headers.ps_access_token);
+      const result = await makePartsTechPostRequest('/catalog/search', requestData);
 
       res.json(result);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to search by vehicle and part type', message: error.response?.data || error.message });
+      res.status(500).json({
+        error: 'Failed to search by vehicle and part type',
+        message: error.response?.data || error.message,
+      });
     }
   },
 
@@ -54,7 +60,10 @@ module.exports = {
 
       res.json(result);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to search by VIN and keyword', message: error.response?.data || error.message });
+      res.status(500).json({
+        error: 'Failed to search by VIN and keyword',
+        message: error.response?.data || error.message,
+      });
     }
   },
 
@@ -72,7 +81,10 @@ module.exports = {
 
       res.json(result);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to search by VIN and part type', message: error.response?.data || error.message });
+      res.status(500).json({
+        error: 'Failed to search by VIN and part type',
+        message: error.response?.data || error.message,
+      });
     }
   },
 };
