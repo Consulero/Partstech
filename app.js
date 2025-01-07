@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/user");
 const psSearchRoutes = require("./routes/ps-catalog-search");
 const psVehicleRoutes = require("./routes/ps-vehicle-search");
+const psCategoryRoutes = require("./routes/ps-category"); 
 
 const PORT = process.env.PORT;
 const app = express();
@@ -24,6 +25,7 @@ app.use(
 app.use("/api/users", userRoutes);
 app.use("/api/ps-search", psSearchRoutes);
 app.use("/api/ps-vehicle", psVehicleRoutes);
+app.use("/api/ps-category", psCategoryRoutes);
 
 const start = async () => {
   try {
