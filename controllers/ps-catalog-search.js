@@ -25,12 +25,11 @@ module.exports = {
 
   async searchByVehicleAndPartType(req, res) {
     try {
-      const { vehicleParams, engineParams, partTypeIds } = req.body.data;
+      const { searchParams, partTypeIds } = req.body.data;
+
+      console.log('searchParams', searchParams, 'partTypeIds', partTypeIds);
       const requestData = {
-        searchParams: {
-          vehicleParams,
-          engineParams,
-        },
+        searchParams,
         partTypeIds,
       };
 
