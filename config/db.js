@@ -17,6 +17,18 @@ const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.User = require('../models/user')(sequelize, Sequelize);
+db.PunchoutSession = require('../models/punchout-session')(sequelize, Sequelize);
+db.PartType = require('../models/part-type')(sequelize, Sequelize);
 
-db.user = require('../models/user')(sequelize, Sequelize, dbName);
+// relationships
+db.PunchoutSession.hasMany(db.PartType, {
+  foreignKey: 'punchoutSessionId',
+  as: 'partTypes', // Alias for related records
+});
+db.PartType.belongsTo(db.PunchoutSession, {
+  foreignKey: 'punchoutSessionId',
+  as: 'punchoutSession',
+});
+
 module.exports = db;
