@@ -8,7 +8,8 @@ const psAuthRoutes = require('./routes/ps-auth');
 const psSearchRoutes = require('./routes/ps-catalog-search');
 const psVehicleRoutes = require('./routes/ps-vehicle-search');
 const psCategoryRoutes = require('./routes/ps-category');
-const punchoutSessionRoutes = require('./routes/punchout-session');
+const quotationRoutes = require('./routes/quotation');
+const psCallbackRoutes = require('./routes/ps-callback');
 
 const PORT = process.env.PORT;
 const app = express();
@@ -28,7 +29,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/ps-search', psSearchRoutes);
 app.use('/api/ps-vehicle', psVehicleRoutes);
 app.use('/api/ps-category', psCategoryRoutes);
-app.use('/api/quotes', punchoutSessionRoutes);
+app.use('/api/quotes', quotationRoutes);
+app.use('/api/callback', psCallbackRoutes);
 
 const start = async () => {
   try {
