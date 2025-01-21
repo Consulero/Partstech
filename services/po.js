@@ -3,21 +3,21 @@ const moment = require('moment');
 module.exports = {
   async generatePo(poInfo) {
     try {
-      const poLastNumber = poInfo?.dataValues?.poLastNumber || 1;
-      const poLastDate = poInfo?.dataValues?.poLastDate ? moment(poInfo.dataValues.poLastDate).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD');
+      const managerName = 'SM'; // todo: get from login user
+      const poLastNumber = poInfo?.dataValues?.poLastNumber || 0;
+      const poLastDate = poInfo?.dataValues?.createdAt ? moment(poInfo.dataValues.createdAt).format('YYYY-MM-DD') : null;
 
       const todayDate = moment().format('YYYY-MM-DD');
 
-      const nextPoNumber = moment(todayDate).isAfter(poLastDate) ? 1 : poLastNumber + 1;
+      const nextPoNumber = poLastDate === todayDate ? poLastNumber + 1 : 1;
 
-      const paddedPoNumber = String(nextPoNumber).padStart(5, '0');
+      const paddedPoNumber = String(nextPoNumber).padStart(4, '0');
 
-      const hubName = 'HUB_NAME';
-      const poNumber = `${hubName}_${todayDate}_${paddedPoNumber}`;
+      const poNumber = `${moment(todayDate).format('YYYYMMDD')}${managerName}${paddedPoNumber}`;
 
       return poNumber;
     } catch (error) {
-      console.error(`Generate po error: ${error.response?.data || error.message}`);
+      console.error(`Generate PO error: ${error.response?.data || error.message}`);
     }
   },
 };

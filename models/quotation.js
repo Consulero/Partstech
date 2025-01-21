@@ -8,7 +8,21 @@ module.exports = (sequelize, Sequelize) => {
       },
       redirectUrl: {
         type: Sequelize.TEXT,
-        allowNull: false,
+      },
+      orders: {
+        type: Sequelize.TEXT,
+      },
+      action: {
+        type: Sequelize.STRING,
+      },
+      poNumber: {
+        type: Sequelize.STRING,
+      },
+      poLastNumber: {
+        type: Sequelize.INTEGER,
+      },
+      status: {
+        type: Sequelize.STRING,
       },
     },
     {

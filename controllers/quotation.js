@@ -1,6 +1,8 @@
+require('dotenv').config();
 const db = require('../config/db');
 const { makePartsTechPostRequest } = require('../utils/ps-axios');
 const { generatePo } = require('../services/po');
+const { Op } = require('sequelize');
 
 module.exports = {
   async findAll(req, res) {
@@ -33,9 +35,9 @@ module.exports = {
   async reqQuote(req, res) {
     try {
       const { vehicleInfo, partTypeIds } = req.body.data;
-      
-      const lastPoInfo = await db.PurchaseOrder.findOne({
-        attributes: ['poLastDate', 'poLastNumber'],
+      //todo : get the partTypeIds from ui
+      const lastPoInfo = await db.Quotation.findOne({
+        attributes: ['createdAt', 'poLastNumber'],
         order: [['id', 'DESC']],
       });
 
@@ -43,9 +45,30 @@ module.exports = {
 
       const result = await makePartsTechPostRequest(`/punchout/quote/create`, {
         searchParams: { vehicleParams: vehicleInfo, partTypeIds: [5132, 10328] },
-        urls: { callbackUrl: `${process.env.PS_CALLBACK_URL}/quote`, returnUrl: 'http://localhost:3000/catalog' },
+        urls: { callbackUrl: `${process.env.PS_CALLBACK_URL}/quote`, returnUrl: `${process.env.PS_REDIRECT_URL}/quotations` },
         settings: { poNumber: poNumber },
       });
+
+      res.status(200).json(result);
+    } catch (error) {
+      console.error(error.response?.data || error.message);
+      res.status(500).json(error);
+    }
+  },
+
+  async updateQuoteStatus(req, res) {
+    try {
+      const { ids, status } = req.body;
+      const result = await db.Quotation.update(
+        { status: status },
+        {
+          where: {
+            id: {
+              [Op.in]: ids,
+            },
+          },
+        }
+      );
 
       res.status(200).json(result);
     } catch (error) {
