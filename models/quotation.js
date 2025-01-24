@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT,
       },
       orders: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
       },
       action: {
         type: Sequelize.STRING,

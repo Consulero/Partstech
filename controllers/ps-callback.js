@@ -14,7 +14,7 @@ module.exports = {
       const payload = {
         sessionId: data.sessionId,
         redirectUrl: '',
-        orders: JSON.stringify(data),
+        orders: data,
         action: data.action,
         status: 'pending',
         poNumber: poNumber,

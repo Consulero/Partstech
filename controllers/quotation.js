@@ -76,4 +76,18 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+
+  async checkPartavailability(req, res) {
+    try {
+      const orderData = req.body.data;
+
+      const partDetails = orderData.parts?.map(({ orderItemId, quantity }) => ({ orderItemId, quantity }));
+      const result = await makePartsTechPostRequest(`/punchout/cart/custom/availability`, { orderItems: partDetails });
+
+      res.status(200).json(result.orders[0]);
+    } catch (error) {
+      console.error(error.response?.data || error.message);
+      res.status(500).json(error);
+    }
+  },
 };

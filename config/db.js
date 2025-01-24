@@ -19,6 +19,5 @@ db.Sequelize = Sequelize;
 
 db.User = require('../models/user')(sequelize, Sequelize);
 db.Quotation = require('../models/quotation')(sequelize, Sequelize);
-db.PurchaseOrder = require('../models/purchase-order')(sequelize, Sequelize);
 
 module.exports = db;
