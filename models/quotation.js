@@ -24,6 +24,10 @@ module.exports = (sequelize, Sequelize) => {
       status: {
         type: Sequelize.STRING,
       },
+      isOrderPlaced: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       tableName: 'quotations',

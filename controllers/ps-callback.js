@@ -26,4 +26,13 @@ module.exports = {
       console.error(`Submit Quote error: ${error.response?.data || error.message}`);
     }
   },
+
+  async saveOrder(req, res) {
+    try {
+      const data = req.body;
+      console.log('data=', data);
+    } catch (error) {
+      console.error(`Submit Quote error: ${error.response?.data || error.message}`);
+    }
+  },
 };

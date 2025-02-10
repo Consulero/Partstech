@@ -10,6 +10,7 @@ const psVehicleRoutes = require('./routes/ps-vehicle-search');
 const psCategoryRoutes = require('./routes/ps-category');
 const quotationRoutes = require('./routes/quotation');
 const psCallbackRoutes = require('./routes/ps-callback');
+const orderRoutes = require('./routes/order');
 
 const PORT = process.env.PORT;
 const app = express();
@@ -31,6 +32,7 @@ app.use('/api/ps-vehicle', psVehicleRoutes);
 app.use('/api/ps-category', psCategoryRoutes);
 app.use('/api/quotes', quotationRoutes);
 app.use('/api/callback', psCallbackRoutes);
+app.use('/api/orders', orderRoutes);
 
 const start = async () => {
   try {
