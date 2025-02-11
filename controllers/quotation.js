@@ -34,8 +34,8 @@ module.exports = {
 
   async reqQuote(req, res) {
     try {
-      const { vehicleInfo, partTypeIds } = req.body.data;
-      //todo : get the partTypeIds from ui
+      const { vehicleInfo } = req.body.data;
+
       const lastPoInfo = await db.Quotation.findOne({
         attributes: ['createdAt', 'poLastNumber'],
         order: [['id', 'DESC']],
@@ -44,7 +44,7 @@ module.exports = {
       const poNumber = await generatePo(lastPoInfo);
 
       const result = await makePartsTechPostRequest(`/punchout/quote/create`, {
-        searchParams: { vehicleParams: vehicleInfo, partTypeIds: [5132, 10328] },
+        searchParams: { vehicleParams: vehicleInfo },
         urls: { callbackUrl: `${process.env.PS_CALLBACK_URL}/quote`, returnUrl: `${process.env.PS_REDIRECT_URL}/quotations` },
         settings: { poNumber: poNumber },
       });

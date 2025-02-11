@@ -17,6 +17,9 @@ async function updateAccessAndRefreshToken() {
     });
     process.env.PARTSTECH_ACCESS_TOKEN = result.data.accessToken;
     process.env.PARTSTECH_REFRESH_TOKEN = result.data.refreshToken;
+
+    // console.log('Access Token:\n\n', process.env.PARTSTECH_ACCESS_TOKEN,"\n\n");
+
     console.info('Generating Access and Refresh Token!!!');
   } catch (e) {
     throw {

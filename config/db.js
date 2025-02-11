@@ -20,5 +20,6 @@ db.Sequelize = Sequelize;
 db.User = require('../models/user')(sequelize, Sequelize);
 db.Quotation = require('../models/quotation')(sequelize, Sequelize);
 db.Order = require('../models/order')(sequelize, Sequelize);
+db.Inventory = require('../models/inventory')(sequelize, Sequelize);
 
 module.exports = db;

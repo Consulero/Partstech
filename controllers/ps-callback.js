@@ -3,11 +3,13 @@ const db = require('../config/db');
 module.exports = {
   async submitQuote(req, res) {
     try {
+      console.log("=======>",req.body)
       const data = req.body;
       if (!req.body) {
         console.error('Unable to get submitQuote data');
         return;
       }
+
 
       const poNumber = data.orders[0]?.poNumber;
       const poLastNumber = poNumber.slice(-4);

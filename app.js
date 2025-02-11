@@ -11,6 +11,7 @@ const psCategoryRoutes = require('./routes/ps-category');
 const quotationRoutes = require('./routes/quotation');
 const psCallbackRoutes = require('./routes/ps-callback');
 const orderRoutes = require('./routes/order');
+const inventoryRoutes = require('./routes/inventory');
 
 const PORT = process.env.PORT;
 const app = express();
@@ -33,6 +34,7 @@ app.use('/api/ps-category', psCategoryRoutes);
 app.use('/api/quotes', quotationRoutes);
 app.use('/api/callback', psCallbackRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/inventory', inventoryRoutes);
 
 const start = async () => {
   try {
