@@ -15,6 +15,9 @@ module.exports = (sequelize, Sequelize) => {
       action: {
         type: Sequelize.STRING,
       },
+      orderType: {
+        type: Sequelize.STRING,
+      },
       poNumber: {
         type: Sequelize.STRING,
       },

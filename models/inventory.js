@@ -1,64 +1,89 @@
+const { all } = require("axios");
+
 module.exports = (sequelize, Sequelize) => {
     const Inventory = sequelize.define(
         'Inventory',
         {
-            inventoryUID: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            partNumber: {
-                type: Sequelize.STRING,
-                allowNull: false,
+            brandUid: {
+                type: Sequelize.INTEGER,
             },
             brandId: {
                 type: Sequelize.STRING,
-
             },
-            lineCode: {
+            brandName: {
                 type: Sequelize.STRING,
-                allowNull: false,
             },
-            partDescription: {
+            brandDisplayName: {
                 type: Sequelize.STRING,
-
             },
-            supplierId: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
-            supplierUID: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            supplierName: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            categoryUID: {
-                type: Sequelize.STRING,
-
-            },
-            categoryName: {
-                type: Sequelize.STRING,
-
-            },
-            onHand: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                defaultValue: 0,
-            },
-            partPrice: {
+            priceFet: {
                 type: Sequelize.FLOAT,
-                allowNull: false,
                 defaultValue: 0,
             },
-            partCost: {
+            priceMap: {
                 type: Sequelize.FLOAT,
-                allowNull: false,
                 defaultValue: 0,
             },
-            type: {
-                type: Sequelize.STRING, //parts or tires
+            priceCore: {
+                type: Sequelize.FLOAT,
+                defaultValue: 0,
+            },
+            priceCost: {
+                type: Sequelize.FLOAT,
+            },
+            priceList: {
+                type: Sequelize.FLOAT,
+                defaultValue: 0,
+            },
+            pricePrice: {
+                type: Sequelize.FLOAT,
+            },
+            priceRetail: {
+                type: Sequelize.FLOAT,
+            },
+            priceDiscount: {
+                type: Sequelize.FLOAT,
+                defaultValue: 0,
+            },
+            partId: {
+                type: Sequelize.STRING,
+            },
+            imageUrl: {
+                type: Sequelize.TEXT,
+            },
+            partName: {
+                type: Sequelize.STRING,
+            },
+            taxonomyCategoryId: {
+                type: Sequelize.INTEGER,
+            },
+            taxonomyPartTypeId: {
+                type: Sequelize.INTEGER,
+            },
+            taxonomyCategoryName: {
+                type: Sequelize.STRING,
+            },
+            taxonomyPartTypeName: {
+                type: Sequelize.STRING,
+            },
+            taxonomySubCategoryId: {
+                type: Sequelize.INTEGER,
+            },
+            taxonomySubCategoryName: {
+                type: Sequelize.STRING,
+            },
+            taxonomyPartTypeDescription: {
+                type: Sequelize.TEXT,
+            },
+            partNumber: {
+                type: Sequelize.STRING,
+            },
+            partCategory: {
+                type: Sequelize.STRING,
+            },
+            quantity: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0,
                 allowNull: false,
             },
         },
