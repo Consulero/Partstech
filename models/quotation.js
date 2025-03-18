@@ -1,34 +1,34 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const Quotation = sequelize.define(
     'Quotation',
     {
       sessionId: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       redirectUrl: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
       },
       orders: {
-        type: Sequelize.JSON,
+        type: DataTypes.JSON,
       },
       action: {
-        type: Sequelize.STRING,
+        type: DataTypes.ENUM('SUBMIT_QUOTE', 'PURCHASE'),
       },
       orderType: {
-        type: Sequelize.STRING,
+        type: DataTypes.ENUM('tire', 'part')
       },
       poNumber: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       poLastNumber: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
       },
       status: {
-        type: Sequelize.STRING,
+        type: DataTypes.ENUM('pending', 'approved', 'rejected')
       },
       isOrderPlaced: {
-        type: Sequelize.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
     },

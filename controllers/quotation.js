@@ -1,7 +1,7 @@
 require('dotenv').config();
 const db = require('../config/db');
 const { makePartsTechPostRequest } = require('../utils/ps-axios');
-const { generatePo } = require('../services/po');
+const { generatePo } = require('./po');
 const { Op } = require('sequelize');
 
 module.exports = {

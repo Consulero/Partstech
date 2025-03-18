@@ -1,13 +1,12 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define(
     'Order',
     {
       orders: {
-        type: Sequelize.JSON,
+        type: DataTypes.JSON,
       },
-      reviewStatus: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      orderType: {
+        type: DataTypes.ENUM('tire', 'part')
       },
     },
     {

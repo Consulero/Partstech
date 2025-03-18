@@ -7,9 +7,10 @@ module.exports = {
   async findAll(req, res) {
     try {
       const page = parseInt(req.query.page) || 1;
+      const orderType = req.query.orderType
       const limit = parseInt(req.query.limit) || 10;
       const offset = (page - 1) * limit;
-      const whereCondition = {};
+      const whereCondition = { orderType: orderType };
       const totalItems = await db.Order.count({ where: whereCondition });
 
       const data = await db.Order.findAll({
@@ -34,7 +35,7 @@ module.exports = {
 
   async placeOrder(req, res) {
     try {
-      const { data: orderData, orderId } = req.body;
+      const { data: orderData, orderId, orderType } = req.body;
 
       const payload = orderData.map((order) => {
         return {
@@ -68,7 +69,7 @@ module.exports = {
         };
       });
 
-      const order = await db.Order.create({ orders: result.orders });
+      const order = await db.Order.create({ orders: result.orders, orderType: orderType });
       await db.Quotation.update({ isOrderPlaced: true }, { where: { id: orderId } });
       res.status(200).json(order);
     } catch (error) {
@@ -99,7 +100,7 @@ module.exports = {
             invoiceNumbers: [...(order.invoiceNumbers || []), ...(psOrderResult.invoiceNumbers || [])],
           };
         }
-        return order; 
+        return order;
       });
 
       const order = await db.Order.update({ orders }, { where: { id: orderId } });

@@ -1,4 +1,5 @@
 const moment = require('moment');
+const db = require('../config/db');
 
 module.exports = {
   async generatePo(poInfo) {
@@ -20,4 +21,9 @@ module.exports = {
       console.error(`Generate PO error: ${error.response?.data || error.message}`);
     }
   },
+
+  async validatePo(poNumber) {
+    const data = await db.Quotation.findOne({ where: { poNumber: poNumber } });
+    return data ? true : false
+  }
 };
