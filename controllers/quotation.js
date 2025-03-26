@@ -3,6 +3,7 @@ const db = require('../config/db');
 const { makePartsTechPostRequest } = require('../utils/ps-axios');
 const { generatePo } = require('./po');
 const { Op } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 module.exports = {
   async findAll(req, res) {
@@ -17,7 +18,20 @@ module.exports = {
         where: whereCondition,
         offset: offset,
         limit: limit,
-        order: [['createdAt', 'DESC']],
+        attributes: [
+          'id',
+          'sessionId',
+          'redirectUrl',
+          'orders',
+          'action',
+          'orderType',
+          'poNumber',
+          'poLastNumber',
+          'status',
+          'isOrderPlaced',
+          [Sequelize.fn("DATE_FORMAT", Sequelize.col("createdAt"), "%m-%d-%Y"), "createdAt"]
+        ],
+        order: [['id', 'DESC']],
       });
       res.status(200).json({
         data: data,
@@ -28,6 +42,7 @@ module.exports = {
         },
       });
     } catch (error) {
+      console.log(error)
       res.status(500).json(error);
     }
   },
